@@ -1,16 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import Lumix_GX80 from './cameras.js';
+
+
+const lumix = new Lumix_GX80("192.168.54.1");
+
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Button title="Reinit" onPress={reinit_camera} />
       <Button title="shoot a photo" onPress={shootPhoto}></Button>
     </View>
   );
 }
 
 function shootPhoto() {
-  console.log("shoot a photo");
+  lumix.takePicture();
+}
+
+function reinit_camera() {
+  lumix.init_camera();
 }
 
 const styles = StyleSheet.create({
